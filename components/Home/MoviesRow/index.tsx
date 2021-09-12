@@ -4,10 +4,11 @@ import { useRouter } from 'next/router';
 
 import arrowIcon from '../../../public/images/arrow-icon.svg';
 import { MoviesRowList, MoviesRowSlider, MoviesRowWrapper } from './styles';
+import { Movie } from '../../../types/homepage';
 
 type MoviesRowProps = {
   title: string;
-  movies: { name: string; img: StaticImageData }[];
+  movies: Movie[];
 };
 
 const MoviesRow: React.FC<MoviesRowProps> = ({ title, movies }) => {
@@ -53,13 +54,16 @@ const MoviesRow: React.FC<MoviesRowProps> = ({ title, movies }) => {
           <Image src={arrowIcon} alt="slide left" />
         </button>
         <MoviesRowList qtdMovies={movies.length} slider={slider}>
-          {movies.map((movie, index) => (
+          {movies.map(movie => (
             <li
-              key={title + movie.name + index}
-              onClick={() => router.push(movie.name)}
-              aria-label={`Click to see details about ${movie.name}`}
+              key={title + movie.title}
+              onClick={() => router.push(`/${movie.media_type}/${movie.id}`)}
+              aria-label={`Click to see details about ${movie.title}`}
             >
-              <Image src={movie.img} alt={`${movie.name} cover`} />
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movie.poster}`}
+                alt={`${movie.title} cover`}
+              />
             </li>
           ))}
         </MoviesRowList>

@@ -2,31 +2,41 @@ import React, { memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import layouttestimg from '../../../public/images/layouttest.jpg';
 import goldStarIcon from '../../../public/images/goldStarIcon.svg';
 import {
   RandomHighlightedContainer,
   RandomHighlightedWrapper,
   RandomHighlightedFooter
 } from './styles';
+import { Highlighted } from '../../../types/homepage';
 
-const RandomHighlighted: React.FC = () => {
+type RandomHighlightedProps = {
+  highlighted: Highlighted;
+};
+
+const RandomHighlighted: React.FC<RandomHighlightedProps> = ({
+  highlighted
+}) => {
   return (
-    <RandomHighlightedWrapper bgImage={layouttestimg}>
+    <RandomHighlightedWrapper
+      bgImage={
+        highlighted.backdrop ||
+        `https://via.placeholder.com/1920x1080?text=${highlighted.title}`
+      }
+    >
       <RandomHighlightedContainer as="article">
-        <h1>Forrest Gump</h1>
+        <h1>{highlighted?.title}</h1>
         <p>
-          A man with a low IQ has accomplished great things in his life and been
-          present during significant historic events—in each case, far exceeding
-          what anyone imagined he could do. But despite all he has achieved, his
-          one true love eludes him.
+          {highlighted.overview.length > 250
+            ? `${highlighted.overview.substring(0, 250)}...`
+            : highlighted.overview}
         </p>
         <RandomHighlightedFooter>
           <div>
             <Image src={goldStarIcon} alt="A gold star icon" />
-            <span>8.5</span>
+            <span>{highlighted.rate}</span>
           </div>
-          <Link href="#">See more</Link>
+          <Link href={`/movie/${highlighted.id}`}>See more</Link>
         </RandomHighlightedFooter>
       </RandomHighlightedContainer>
     </RandomHighlightedWrapper>

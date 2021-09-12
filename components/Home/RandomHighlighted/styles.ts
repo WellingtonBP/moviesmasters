@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Container from '../../Container';
 
-const RandomHighlightedWrapper = styled.section<{ bgImage: StaticImageData }>`
+const RandomHighlightedWrapper = styled.section<{ bgImage: string }>`
   padding: 8rem 0 1.5rem;
   position: relative;
   z-index: 2;
@@ -14,8 +14,9 @@ const RandomHighlightedWrapper = styled.section<{ bgImage: StaticImageData }>`
     height: 100%;
     top: 0;
     left: 0;
-    opacity: 0.6;
-    background-image: ${props => `url(${props.bgImage.src})`};
+    opacity: 0.55;
+    background-image: ${props =>
+      `url(https://image.tmdb.org/t/p/original${props.bgImage})`};
     background-size: cover;
   }
 
