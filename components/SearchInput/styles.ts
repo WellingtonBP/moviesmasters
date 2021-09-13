@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.div<{ searching: boolean }>`
   border: 1px solid white;
   border-radius: 5rem;
   position: relative;
   padding: 0.4rem 2rem;
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  margin-top: ${({ searching }) => (searching ? '5rem' : '0')};
   input {
     width: 100%;
     &,
@@ -22,13 +23,15 @@ const SearchWrapper = styled.div`
     right: 1.5rem;
     transform: translateY(-50%);
     img {
-      width: 2.5rem;
+      width: ${({ searching }) => (searching ? '1.9rem' : '2.5rem')};
+      cursor: ${({ searching }) => (searching ? 'pointer' : 'initial')};
     }
   }
 
   @media (min-width: 576px) {
     width: 26rem;
     margin-bottom: 0;
+    margin-top: 0;
   }
 
   @media (min-width: 768px) {

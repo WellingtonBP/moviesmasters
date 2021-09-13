@@ -35,3 +35,11 @@ export type MoviesResponse = {
 export type TvResponse = Omit<MoviesResponse, 'results'> & {
   results: TvResults[];
 };
+
+export type MultiSearchResponse = Omit<MoviesResponse, 'results'> & {
+  results: Array<
+    (TvResults | MoviesResults) & {
+      media_type: string;
+    }
+  >;
+};

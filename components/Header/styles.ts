@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 import Container from '../Container';
 
-const HeaderWrapper = styled.header<{ pageScroll: boolean }>`
+const HeaderWrapper = styled.header<{
+  pageScroll: boolean;
+}>`
   padding: 1rem 0;
   position: fixed;
   z-index: 3;
   width: 100%;
   transition: background 300ms;
-  background: ${props => (props.pageScroll ? 'var(--header)' : 'transparent')};
+  background: ${({ pageScroll }) =>
+    pageScroll ? 'var(--header)' : 'transparent'};
 `;
 
 const HeaderContainer = styled(Container)`

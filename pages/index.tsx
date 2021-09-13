@@ -16,6 +16,7 @@ const HomePage: NextPage<HomePageProps> = props => {
       <Head>
         <title>Movies Masters - Home</title>
       </Head>
+
       <Home {...props} />
     </>
   );
@@ -39,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   for (const key in endpoints) {
     const endpoint = endpoints[key as keyof typeof endpoints];
     const response = await fetch(
-      `https://api.themoviedb.org/3${endpoint}?api_key=${process.env.API_KEY}`
+      `https://api.themoviedb.org/3${endpoint}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     );
 
     const { results } = (await response.json()) as MoviesResponse | TvResponse;

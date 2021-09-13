@@ -21,13 +21,7 @@ const MoviesRow: React.FC<MoviesRowProps> = ({ title, movies }) => {
     switch (direction) {
       case 'right':
         const movieImgSize =
-          wInnerW < 57.6
-            ? 13
-            : wInnerW < 76.8
-            ? 15
-            : wInnerW < 99.2
-            ? 18
-            : 22.15;
+          wInnerW < 57.6 ? 13 : wInnerW < 76.8 ? 15 : wInnerW < 99.2 ? 18 : 22;
         setSlider(curr => {
           const newValue = curr - Math.round(innerW / 2);
           const listWidth = movieImgSize * movies.length;
