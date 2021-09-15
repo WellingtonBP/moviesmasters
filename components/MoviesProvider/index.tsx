@@ -6,7 +6,7 @@ import {
   MoviesResults,
   TvResults
 } from '../../types/tmdb';
-import { Movie } from '../../types/homepage';
+import { Movie } from '../../types/moviesmasters';
 
 const api_key = process.env.NEXT_PUBLIC_API_KEY!;
 

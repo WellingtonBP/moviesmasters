@@ -1,19 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import moviesCtx from '../../store/moviesCtx';
 import popCornIcon from '../../public/images/popcorn-icon.svg';
 import SearchInput from '../SearchInput';
 import { HeaderContainer, HeaderWrapper, Logo, Nav } from './styles';
 
-type HeaderProps = {
-  withSearch?: boolean;
-};
-
-const Header: React.FC<HeaderProps> = ({ withSearch }) => {
+const Header: React.FC = () => {
   const { searchQuery } = useContext(moviesCtx);
   const [pageScroll, setPageScroll] = useState(false);
+  const { pathname } = useRouter();
 
   useEffect(() => {
     const onScroll = () => {
@@ -34,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ withSearch }) => {
             Movies Masters
           </Link>
         </Logo>
-        {withSearch && <SearchInput className="search" />}
+        {pathname === '/' && <SearchInput className="search" />}
         <Nav>
           <Link href="/login">Login</Link>
           <Link href="/sign">Sign</Link>

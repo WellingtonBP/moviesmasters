@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Movie } from '../types/homepage';
+import { Movie } from '../types/moviesmasters';
 
 type MoviesCtx = {
   searchQuery: string;

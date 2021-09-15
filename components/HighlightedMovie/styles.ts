@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import Container from '../../Container';
+import Container from '../Container';
 
-const RandomHighlightedWrapper = styled.section<{ bgImage: string }>`
+const HighlightedWrapper = styled.section<{ bgImage: string }>`
   padding: 8rem 0 1.5rem;
   position: relative;
   z-index: 2;
@@ -29,7 +29,7 @@ const RandomHighlightedWrapper = styled.section<{ bgImage: string }>`
   }
 `;
 
-const RandomHighlightedContainer = styled(Container)`
+const HighlightedContainer = styled(Container)`
   color: white;
   h1 {
     font-family: 'Salsa', cursive;
@@ -65,7 +65,7 @@ const RandomHighlightedContainer = styled(Container)`
   }
 `;
 
-const RandomHighlightedFooter = styled.footer`
+const HighlightedFooter = styled.footer`
   font-family: 'Roboto Condensed', sans-serif;
   &,
   div {
@@ -119,8 +119,4 @@ const RandomHighlightedFooter = styled.footer`
   }
 `;
 
-export {
-  RandomHighlightedContainer,
-  RandomHighlightedWrapper,
-  RandomHighlightedFooter
-};
+export { HighlightedContainer, HighlightedWrapper, HighlightedFooter };

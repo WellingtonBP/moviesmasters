@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import arrowIcon from '../../../public/images/arrow-icon.svg';
+import arrowIcon from '../../public/images/arrow-icon.svg';
 import { MoviesRowList, MoviesRowSlider, MoviesRowWrapper } from './styles';
-import { Movie } from '../../../types/homepage';
+import { Movie } from '../../types/moviesmasters';
 
 type MoviesRowProps = {
   title: string;

@@ -7,7 +7,7 @@ export type Movie = {
 
 export type Movies = Record<string, Movie[]>;
 
-export type Highlighted = {
+export type RandomHighlighted = {
   title: string;
   backdrop: string | null;
   overview: string;
@@ -17,5 +17,5 @@ export type Highlighted = {
 
 export type HomePageProps = {
   movies: Movies;
-  highlighted: Highlighted;
+  randomHighlighted: RandomHighlighted;
 };
