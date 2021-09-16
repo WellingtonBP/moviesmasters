@@ -24,7 +24,9 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <HeaderWrapper pageScroll={pageScroll || !!searchQuery}>
+    <HeaderWrapper
+      pageScroll={pageScroll || (!!searchQuery && pathname === '/')}
+    >
       <HeaderContainer>
         <Logo>
           <Image src={popCornIcon} alt="pop corn bucket icon" />

@@ -3,18 +3,71 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import goldStarIcon from '../../public/images/goldStarIcon.svg';
+import Container from '../Container';
 import {
-  HighlightedContainer,
+  Title,
+  Overview,
+  GenresAndTagline,
+  Production,
   HighlightedWrapper,
-  HighlightedFooter
+  Info,
+  Button,
+  Rate,
+  InfoSpan,
+  Actions
 } from './styles';
-import { RandomHighlighted } from '../../types/moviesmasters';
+import {
+  RandomHighlighted,
+  HighlightedDetails
+} from '../../types/moviesmasters';
 
 type HighlightedProps = {
-  highlighted: RandomHighlighted;
+  from?: string;
+  media_type?: string;
+  highlighted: RandomHighlighted & Partial<HighlightedDetails>;
 };
 
-const Highlighted: React.FC<HighlightedProps> = ({ highlighted }) => {
+const Highlighted: React.FC<HighlightedProps> = ({
+  highlighted,
+  media_type = 'movie',
+  from = 'home'
+}) => {
+  const getOverview = (): string => {
+    return highlighted.overview.length > 250 && from === 'home'
+      ? `${highlighted.overview.substring(0, 250)}...`
+      : highlighted.overview;
+  };
+
+  const getInfo = (): JSX.Element => {
+    if (from === 'home') {
+      return (
+        <Button>
+          <Link href={`/movie/${highlighted.id}`}>See more</Link>
+        </Button>
+      );
+    }
+    return (
+      <>
+        <InfoSpan>Popularity: {highlighted.popularity}</InfoSpan>
+        <InfoSpan>Vote Count: {highlighted.vote_count}</InfoSpan>
+        {media_type === 'movie' && (
+          <>
+            <InfoSpan>Budget: {highlighted.budget}</InfoSpan>
+            <InfoSpan>Revenue: {highlighted.revenue}</InfoSpan>
+          </>
+        )}
+      </>
+    );
+  };
+
+  const getReleaseDate = () => {
+    return (
+      media_type === 'movie'
+        ? new Date(highlighted.release_date!)
+        : new Date(highlighted.first_air_date!)
+    ).getFullYear();
+  };
+
   return (
     <HighlightedWrapper
       bgImage={
@@ -22,21 +75,40 @@ const Highlighted: React.FC<HighlightedProps> = ({ highlighted }) => {
         `https://via.placeholder.com/1920x1080?text=${highlighted.title}`
       }
     >
-      <HighlightedContainer as="article">
-        <h1>{highlighted?.title}</h1>
-        <p>
-          {highlighted.overview.length > 250
-            ? `${highlighted.overview.substring(0, 250)}...`
-            : highlighted.overview}
-        </p>
-        <HighlightedFooter>
-          <div>
+      <Container>
+        <Title>{highlighted?.title}</Title>
+        {from === 'details' && (
+          <GenresAndTagline>
+            {highlighted.genres!.map(genre => genre.name).join(', ')}
+          </GenresAndTagline>
+        )}
+        <Overview>{getOverview()}</Overview>
+        <Info>
+          <Rate>
             <Image src={goldStarIcon} alt="A gold star icon" />
             <span>{highlighted.rate}</span>
-          </div>
-          <Link href={`/movie/${highlighted.id}`}>See more</Link>
-        </HighlightedFooter>
-      </HighlightedContainer>
+          </Rate>
+          {getInfo()}
+        </Info>
+        {from === 'details' && (
+          <>
+            <Actions>
+              <Button>Watched</Button>
+              <Button>Watch List</Button>
+              <Button>Rate</Button>
+            </Actions>
+            <Production>
+              {getReleaseDate()}
+              <span>
+                {highlighted.production_companies
+                  ?.map(pc => pc.name)
+                  .join(', ')}
+              </span>
+            </Production>
+            <GenresAndTagline>{highlighted.tagline}</GenresAndTagline>
+          </>
+        )}
+      </Container>
     </HighlightedWrapper>
   );
 };
