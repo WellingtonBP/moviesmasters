@@ -1,13 +1,15 @@
 # Movies Masters :movie_camera:
 
-https://user-images.githubusercontent.com/76077461/132978952-3cfeb302-7ab3-4a48-8285-4702d77e42b2.mp4
+https://user-images.githubusercontent.com/76077461/133543280-c117836d-21b5-43ef-bd4e-dc1d0d9539d6.mp4
+
+
 
 ## Features
 
 - [x] Display highlighted movie
 - [x] Display slider with popular movies / series, top rated movies / series, upcoming movies, trending movies, series on the air
 - [x] Search for a movie / serie
-- [ ] Movie / Tv details page
+- [X] Movie / Tv details page
 - [ ] Login / Signup with aws cognito
 - [ ] Save user data in dynamodb
 
